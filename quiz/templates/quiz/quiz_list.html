@@ -3,26 +3,29 @@
 {% block title %} quiz {% endblock %}
 
 {% block content %}
+    <h2 class="text-center mt-2 mb-2">
+        {{ request.user }} exam
+    </h2>
     <form method="post" action="{% url 'quiz_result' %}">
         {% csrf_token %}
         {% for question in questions %}
             <div class="text-left mt-3">
                 <h4>
-                    {{ question.content }}
+                    {{ forloop.counter }}: {{ question.content }}
                 </h4>
             </div>
             <div class="row mt-2">
             {% for item in dict_questions|get_value_from_dict:question.id %}
                 <label class="col-md-3">
-                    {{ forloop.counter }}: {{ item.0 }}
-                    <input type="radio" value="{{ item.1 }}" name="{{ question.id }}">
+                    {{ forloop.counter }}: {{ item.1 }}
+                    <input type="radio" value="{{ item.2 }}" name="{{ question.id }}">
                 </label>
             {% endfor %}
         {% endfor %}
         </div>
 
 
-        <div class="text-center mt-3">
+        <div class="text-center mt-4">
             <a href="{% url 'quiz_result' %}">
                 <button type="submit" class="btn btn-success">
                     Submit

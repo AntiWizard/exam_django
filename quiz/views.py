@@ -10,10 +10,11 @@ from quiz.models import Question, Choice
 @login_required
 def show_quiz(request):
     questions = Question.objects.order_by('?')[:5]
+    choices = list(
+        Choice.objects.filter(question_id__in=[q.id for q in questions]).values_list('question','choice', 'answer'))
     dict_questions = {}
     for question in questions:
-        dict_questions[question.id] = list(
-            Choice.objects.filter(question_id=question.id).order_by("?").values_list('choice', 'answer'))
+        dict_questions[question.id] = [item for item in choices if item[0] == question.id]
 
     context = {
         "questions": questions,
