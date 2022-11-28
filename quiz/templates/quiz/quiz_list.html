@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load dictionary_tag %}
 {% block title %} quiz {% endblock %}
 
 {% block content %}
@@ -11,15 +12,11 @@
                 </h4>
             </div>
             <div class="row mt-2">
-            {% for key,value in dict_questions.items %}
-                {% if key == question.id %}
-                    {% for item in value %}
-                        <label class="col-md-3">
-                            {{ forloop.counter }}: {{ item.0 }}
-                            <input type="radio" value="{{ item.1 }}" name="{{ question.id }}">
-                        </label>
-                    {% endfor %}
-                {% endif %}
+            {% for item in dict_questions|get_value_from_dict:question.id %}
+                <label class="col-md-3">
+                    {{ forloop.counter }}: {{ item.0 }}
+                    <input type="radio" value="{{ item.1 }}" name="{{ question.id }}">
+                </label>
             {% endfor %}
         {% endfor %}
         </div>
