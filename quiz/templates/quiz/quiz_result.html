@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} quiz {% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <br>
+        <h2>{{ request.user }}</h2>
+        <br>
+        <h4>Correct answer: {{ true }}</h4>
+        <br>
+        <h4>Wrong answer: {{ false }}</h4>
+        <br>
+        <h4>Score: {{ score }}</h4>
+        <br>
+        <a href="{% url "quiz_list" %}">
+            <button class="btn btn-primary">
+                again
+            </button>
+        </a>
+    </div>
+{% endblock %}
