@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+
+{% block content %}
+    <div class="text-center mt-5">
+        <h2>Go to Quiz:</h2>
+        <a href="{% url 'quiz_list' %}">
+            <button class="btn btn-primary">
+                Quiz
+            </button>
+        </a>
+    </div>
+
+{% endblock %}
